@@ -1,6 +1,6 @@
 {
   "name": "html-webpack-pug-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simplifies creation of [Pug/Slim/Haml] files to serve your webpack bundles(Extension of html-webpack-plugin)",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/negibouze/html-webpack-plugin.git"
+    "url": "https://github.com/negibouze/html-webpack-pug-plugin.git"
   },
   "keywords": [
     "webpack",
