@@ -3,6 +3,11 @@ Pug/Slim/Haml extension for the HTML Webpack Plugin
 
 Installation
 ------------
+Install the plugin with npm:
+
+```shell
+$ npm install html-webpack-pug-plugin --save-dev
+```
 
 Usage
 -----
