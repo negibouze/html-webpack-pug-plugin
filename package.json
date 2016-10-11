@@ -1,0 +1,23 @@
+{
+  "name": "html-webpack-pug-plugin",
+  "version": "0.0.1",
+  "description": "Simplifies creation of [Pug/Slim/Haml] files to serve your webpack bundles(Extension of html-webpack-plugin)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/negibouze/html-webpack-plugin.git"
+  },
+  "keywords": [
+    "webpack",
+    "plugin",
+    "pug/jade",
+    "slim",
+    "haml",
+    "html-webpack-plugin"
+  ],
+  "author": "Yoshiaki Itakura (https://github.com/negibouze)",
+  "license": "MIT"
+}
