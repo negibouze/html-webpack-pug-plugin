@@ -12,6 +12,8 @@ Require the plugin in your webpack config:
 var HtmlWebpackPugPlugin = require('html-webpack-pug-plugin');
 ```
 
+ES2015
+
 ```es2015
 import HtmlWebpackPugPlugin from 'html-webpack-pug-plugin';
 ```
