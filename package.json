@@ -1,6 +1,6 @@
 {
   "name": "html-webpack-pug-plugin",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Simplifies creation of [Pug/Slim/Haml] files to serve your webpack bundles(Extension of html-webpack-plugin)",
   "main": "index.js",
   "scripts": {
