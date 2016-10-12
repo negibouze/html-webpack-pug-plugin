@@ -39,17 +39,17 @@ Even if you generate multiple files make sure that you add the HtmlWebpackPugPlu
 ```javascript
 plugins: [
   new HtmlWebpackPlugin({
-    template: 'src/views/_test.pug'
+		template: 'src/views/_test.pug',
 		filename: 'test.pug',
 		filetype: 'pug'
 	}),
   new HtmlWebpackPlugin({
-    template: 'src/views/_test.slim'
+		template: 'src/views/_test.slim',
 		filename: 'test.slim',
 		filetype: 'slim'
 	}),
   new HtmlWebpackPlugin({
-    template: 'src/views/_test.haml'
+		template: 'src/views/_test.haml',
 		filename: 'test.haml',
 		filetype: 'haml'
 	}),
