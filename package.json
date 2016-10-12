@@ -13,7 +13,8 @@
   "keywords": [
     "webpack",
     "plugin",
-    "pug/jade",
+    "pug",
+    "jade",
     "slim",
     "haml",
     "html-webpack-plugin"
