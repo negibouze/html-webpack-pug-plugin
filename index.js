@@ -2,7 +2,7 @@
 
 var assert = require('assert');
 
-function HtmlWebpackHarddiskPlugin (options) {
+function HtmlWebpackPugPlugin (options) {
   assert.equal(options, undefined, 'The HtmlWebpackPugPlugin does not accept any options');
 }
 
