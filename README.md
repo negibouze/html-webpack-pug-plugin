@@ -53,7 +53,7 @@ plugins: [
 		filename: 'test.haml',
 		filetype: 'haml'
 	}),
-  new HtmlWebpackHarddiskPlugin()
+  new HtmlWebpackPugPlugin()
 ]  
 ```
 
