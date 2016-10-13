@@ -62,7 +62,7 @@ Output Example
 
 Pug/Jade
 
-```pug/jade
+```pug
 doctype html
 html
   head
