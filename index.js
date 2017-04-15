@@ -139,11 +139,14 @@ HtmlWebpackPugPlugin.prototype.injectAssets = function (file, head, body, assets
 
   var match = bodyRegExp.exec(file);
   if (match.length) {
-    var hlSpace = match[1].repeat(2);
+    var headSpace = match[1];
+    var hlSpace = headSpace.repeat(2);
     if (head.length) {
       head = head.map(function(v) {
         return hlSpace + v;
       });
+      if(!/head/.test(file))
+          head = [headSpace + 'head'].concat(head)
       // Append assets to head element
       file = file.replace(bodyRegExp, head.join('\n') + '\n' + match[0]);
     }
@@ -153,6 +156,8 @@ HtmlWebpackPugPlugin.prototype.injectAssets = function (file, head, body, assets
         return hlSpace + v;
       });
       // Append scripts to the end of the file:
+      if(file[file.length-1] != '\n')
+          file += '\n'
       file += body.join('\n');
     }
   }
