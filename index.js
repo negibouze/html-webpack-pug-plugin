@@ -138,7 +138,7 @@ HtmlWebpackPugPlugin.prototype.injectAssets = function (file, head, body, assets
   var bodyRegExp = /( *)(%?body)/i;
 
   var match = bodyRegExp.exec(file);
-  if (match.length) {
+  if (match) {
     var hlSpace = match[1].repeat(2);
     if (head.length) {
       head = head.map(function(v) {
