@@ -135,7 +135,7 @@ HtmlWebpackPugPlugin.prototype.injectAssetsIntoSlim = function (file, styles, sc
  */
 HtmlWebpackPugPlugin.prototype.injectAssets = function (file, head, body, assets) {
   var self = this;
-  var bodyRegExp = /( *)(%?body)/i;
+  var bodyRegExp = /^( *)(%?body)\b/im;
 
   var match = bodyRegExp.exec(file);
   if (match) {
