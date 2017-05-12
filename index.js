@@ -22,11 +22,10 @@ HtmlWebpackPugPlugin.prototype.apply = function (compiler) {
 HtmlWebpackPugPlugin.prototype.postProcessHtml = function (htmlPluginData, callback) {
   var self = this;
   var options = htmlPluginData.plugin.options;
-  // Skip if the plugin configuration didn't set `inject` to true or didn't set `filetype`
-  if (!options.inject || !options.filetype) {
-    return callback(null);
+  // If the plugin configuration set `inject` to true and set `filetype`
+  if (options.inject && options.filetype) {
+    htmlPluginData.html = self.injectAssetsIntoFile(htmlPluginData);
   }
-  htmlPluginData.html = self.injectAssetsIntoFile(htmlPluginData);
   callback(null, htmlPluginData);
 };
 
@@ -132,6 +131,10 @@ HtmlWebpackPugPlugin.prototype.injectAssetsIntoSlim = function (file, styles, sc
 
 /**
  * Injects the assets into the given string
+ * @param file base file
+ * @param head inject in the head tag (e.g. style tag)
+ * @param body inject in the body tag (e.g. script tag)
+ * @param assets
  */
 HtmlWebpackPugPlugin.prototype.injectAssets = function (file, head, body, assets) {
   var self = this;
@@ -145,8 +148,9 @@ HtmlWebpackPugPlugin.prototype.injectAssets = function (file, head, body, assets
       head = head.map(function(v) {
         return hlSpace + v;
       });
-      if(!/head/.test(file))
-          head = [headSpace + 'head'].concat(head)
+      if (!/head/.test(file)) {
+        head = [headSpace + 'head'].concat(head)
+      }
       // Append assets to head element
       file = file.replace(bodyRegExp, head.join('\n') + '\n' + match[0]);
     }
@@ -156,22 +160,23 @@ HtmlWebpackPugPlugin.prototype.injectAssets = function (file, head, body, assets
         return hlSpace + v;
       });
       // Append scripts to the end of the file:
-      if(file[file.length-1] != '\n')
-          file += '\n'
+      if (file[file.length-1] != '\n') {
+        file += '\n'
+      }
       file += body.join('\n');
     }
   }
 
   // Inject manifest into the opening html tag
-  // if (assets.manifest) {
-  //   html = html.replace(/(%?html)/i, function (match, start) {
-  //     // Append the manifest only if no manifest was specified
-  //     if (/\smanifest\s*=/.test(match)) {
-  //       return match;
-  //     }
-  //     return start + ' manifest="' + assets.manifest + '"' + end;
-  //   });
-  // }
+  if (assets.manifest) {
+    html = html.replace(/(%?html)/i, function (match, start) {
+      // Append the manifest only if no manifest was specified
+      if (/\smanifest\s*=/.test(match)) {
+        return match;
+      }
+      return start + ' manifest="' + assets.manifest + '"' + end;
+    });
+  }
   return file;
 };
 

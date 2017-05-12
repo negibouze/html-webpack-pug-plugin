@@ -1,0 +1,8 @@
+doctype html
+html lang="en"
+  head
+    meta charset="utf-8"
+    title <%= htmlWebpackPlugin.options.title %>
+    meta content='width=device-width, initial-scale=1' name='viewport'
+  body
+    <%= require('html!./partial.slim') %>
