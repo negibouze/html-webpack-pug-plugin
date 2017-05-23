@@ -3,10 +3,10 @@ Pug/Jade extension for the HTML Webpack Plugin
 
 Notice
 ------------
-Slim and Haml are not supported since version0.1.0.
+Slim and Haml are not supported since version0.1.0.  
 If you are using this package with Slim or Haml, please change to these packages.
 
-Slim: [html-webpack-slim-plugin](https://www.npmjs.com/package/html-webpack-slim-plugin)
+Slim: [html-webpack-slim-plugin](https://www.npmjs.com/package/html-webpack-slim-plugin)  
 Haml: [html-webpack-haml-plugin](https://www.npmjs.com/package/html-webpack-haml-plugin)
 
 Installation
