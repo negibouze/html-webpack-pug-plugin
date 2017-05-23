@@ -1,0 +1,9 @@
+doctype html
+html(lang="en")
+  head
+    <%= require('html-loader!./head.pug') %>
+    title <%= htmlWebpackPlugin.options.title %>
+  body#body.main
+    h1 Main
+    img(src="logo.png")
+    <%= require('html-loader!./partial.pug') %>

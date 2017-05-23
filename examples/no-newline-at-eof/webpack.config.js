@@ -21,21 +21,8 @@ module.exports = {
     new ExtractTextPlugin('styles.css'),
     new HtmlWebpackPlugin({
       title: 'HtmlWebpackPlugin example',
-      template: '_template.pug',
-      filename: 'index.pug',
+      template: 'template.pug',
       filetype: 'pug'
-    }),
-    new HtmlWebpackPlugin({
-      title: 'HtmlWebpackPlugin example',
-      template: '_template.slim',
-      filename: 'index.slim',
-      filetype: 'slim'
-    }),
-    new HtmlWebpackPlugin({
-      title: 'HtmlWebpackPlugin example',
-      template: '_template.haml',
-      filename: 'index.haml',
-      filetype: 'haml'
     }),
     new HtmlWebpackPugPlugin()
   ]

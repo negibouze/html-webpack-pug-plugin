@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%= require('html-loader!./head.html') %>
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <h1>Main</h1>
+    <img src="logo.png">
+    <%= require('html-loader!./partial.html') %>
+  </body>
+</html>

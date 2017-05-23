@@ -14,7 +14,7 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.css$/, loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' }) },
-      { test: /\.png$/, loader: 'file-loader' },
+      { test: /\.png$/, loader: 'file-loader?name=[name].[ext]' },
       { test: /\.html$/, loader: 'html-loader' }
     ]
   },
@@ -22,19 +22,11 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin('styles.css'),
     new HtmlWebpackPlugin({
-      template: '_pug.js',
-      filename: 'index.pug',
+      template: 'template-html.js'
+    }),
+    new HtmlWebpackPlugin({
+      template: 'template-pug.js',
       filetype: 'pug'
-    }),
-    new HtmlWebpackPlugin({
-      template: '_slim.js',
-      filename: 'index.slim',
-      filetype: 'slim'
-    }),
-    new HtmlWebpackPlugin({
-      template: '_haml.js',
-      filename: 'index.haml',
-      filetype: 'haml'
     }),
     new HtmlWebpackPugPlugin()
   ]

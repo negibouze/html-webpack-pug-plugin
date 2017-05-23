@@ -19,15 +19,20 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('styles.css'),
+    new HtmlWebpackPlugin(),
     new HtmlWebpackPlugin({
-      favicon: 'favicon.ico',
-      template: 'template.html'
+      filetype: 'pug'
     }),
     new HtmlWebpackPlugin({
-      favicon: 'favicon.ico',
-      template: 'template.pug',
-      filetype: 'pug'
+      filename: 'output.pug'
+    }),
+    new HtmlWebpackPlugin({
+      filetype: 'jade'
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'output.jade'
     }),
     new HtmlWebpackPugPlugin()
   ]
 };
+
