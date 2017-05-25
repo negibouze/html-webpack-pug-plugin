@@ -1,6 +1,21 @@
 Change History
 ==============
 
+v0.2.0 (May 25, 2017)
+---
+
+### Breaking Changes
+
+* None.
+
+### Enhancements
+
+* Supports inject 'head' (HTML Webpack Plugin Configuration).
+
+### Bug Fixes
+
+* adjustHeadElementsIndentation() shouldn't flatten the indentation of nested elements [#9](https://github.com/negibouze/html-webpack-pug-plugin/issues/9)
+
 v0.1.0 (May 23, 2017)
 ---
 
@@ -14,5 +29,5 @@ v0.1.0 (May 23, 2017)
 
 ### Bug Fixes
 
-* Error inject when not have head tag [#3](https://github.com/negibouze/html-webpack-pug-plugin/issues/3)
+* Error inject when not have head tag [#3](https://github.com/negibouze/html-webpack-pug-plugin/issues/3)  
 * Breaks if there's word "body" anywhere in the content (not tag) [#7](https://github.com/negibouze/html-webpack-pug-plugin/issues/7)

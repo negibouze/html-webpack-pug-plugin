@@ -53,7 +53,7 @@ HtmlWebpackPugPlugin.prototype.preProcessHtml = function (htmlPluginData, callba
   if (self.isNoLongerSupported(htmlPluginData)) {
     var message = '\
 Sorry, Slim and Haml are no longer supported.\n\
-If you are using with Slim or Haml, please change to these packages.\n\
+Please change to these packages.\n\
 \n\
 Slim: [html-webpack-slim-plugin](https://www.npmjs.com/package/html-webpack-slim-plugin)\n\
 Haml: [html-webpack-haml-plugin](https://www.npmjs.com/package/html-webpack-haml-plugin)';
@@ -99,21 +99,21 @@ HtmlWebpackPugPlugin.prototype.adjustElementsIndentation = function (html) {
  * Adjust head elements indentation
  * e.g.
  *  before
- *    html(lang="en")
- *      head
+ *    head
  *        meta(charset="utf-8")
- *    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+ *        meta(http-equiv="X-UA-Compatible" content="IE=edge")
  *    meta(name="viewport" content="width=device-width, initial-scale=1")
  *    meta(name="description" content="Webpack App")
- *        title Webpack App
+ *        title
+ *            block title
  *  after
- *    html(lang="en")
- *      head
+ *    head
  *        meta(charset="utf-8")
  *        meta(http-equiv="X-UA-Compatible" content="IE=edge")
  *        meta(name="viewport" content="width=device-width, initial-scale=1")
  *        meta(name="description" content="Webpack App")
- *        title Webpack App
+ *        title
+ *            block title
  * @param html htmlPluginData.html (Pug/Jade)
  */
 HtmlWebpackPugPlugin.prototype.adjustHeadElementsIndentation = function (html) {
@@ -123,7 +123,8 @@ HtmlWebpackPugPlugin.prototype.adjustHeadElementsIndentation = function (html) {
   if (match) {
     var indent = match[2];
     var elements = match[3].split('\n').map(function(v) {
-      return indent + v.trim();
+      var m = /^([\s]*).*$/g.exec(v);
+      return (m[1] === '' ? indent : '') + v.replace(/[ 　]+$/, '');
     });
     html = html.replace(regExp, match[1] + elements.join('\n') + match[4]);
   }
@@ -168,7 +169,11 @@ HtmlWebpackPugPlugin.prototype.adjustHeadElementsIndentation = function (html) {
  */
 HtmlWebpackPugPlugin.prototype.adjustBodyElementsIndentation = function (html) {
   var self = this;
-  var regExp = /^( *)(body.*\n)( *[\s\S]*)/im;
+  var regExp = function(html) {
+    var h = /^( *)head/im.exec(html);
+    var topSpace = h ? h[1] : ' *';
+    return new RegExp('^(' + topSpace + ')(body.*\\n)( *[\\s\\S]*)', 'im');;
+  }(html);
   var match = regExp.exec(html);
   if (match) {
     var padding = false;
@@ -226,7 +231,7 @@ HtmlWebpackPugPlugin.prototype.injectAssetsIntoFile = function (htmlPluginData) 
   var styles = self.headExtraction(html).map(function (e) {
     return e.match(/title>.*<\/title/i) ? 'title ' + options.title : e;
   });
-  var scripts = self.bodyExtraction(html);
+  var scripts = htmlPluginData.plugin.options.inject !== 'head' ? self.bodyExtraction(html) : [];
   var file = hasTemplate ? self.removeUnnecessaryTags(html) : self.defaultTemplate();
 
   styles = styles.map(self.createPugTag);
@@ -265,7 +270,7 @@ HtmlWebpackPugPlugin.prototype.headExtraction = function (html) {
   if (!match || match.length < 2) {
     return [];
   }
-  return match[1].split('><');
+  return match[1].split('><').filter(function(v) { return !v.startsWith('/') });
 };
 
 /**
@@ -300,8 +305,12 @@ HtmlWebpackPugPlugin.prototype.removeUnnecessaryTags = function (html) {
  */
 HtmlWebpackPugPlugin.prototype.injectAssets = function (html, head, body, assets) {
   var self = this;
-  var bodyRegExp = /^( *)(body)\b/im;
-  var match = bodyRegExp.exec(html);
+  var regExp = function(html) {
+    var h = /^( *)head/im.exec(html);
+    var topSpace = h ? h[1] : ' *';
+    return new RegExp('^(' + topSpace + ')(body)\\b', 'im');;
+  }(html);
+  var match = regExp.exec(html);
   if (match) {
     var headSpace = match[1];
     var hlSpace = headSpace.repeat(2);
@@ -313,7 +322,7 @@ HtmlWebpackPugPlugin.prototype.injectAssets = function (html, head, body, assets
         head = [headSpace + 'head'].concat(head)
       }
       // Append assets to head element
-      html = html.replace(bodyRegExp, head.join('\n') + '\n' + match[0]);
+      html = html.replace(regExp, head.join('\n') + '\n' + match[0]);
     }
 
     if (body.length) {
