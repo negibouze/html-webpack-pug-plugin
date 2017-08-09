@@ -1,6 +1,21 @@
 Change History
 ==============
 
+v0.2.1 (Aug 9, 2017)
+---
+
+### Breaking Changes
+
+* None.
+
+### Enhancements
+
+* None.
+
+### Bug Fixes
+
+* no injection when template uses tabs instead of spaces [#10](https://github.com/negibouze/html-webpack-pug-plugin/issues/10)
+
 v0.2.0 (May 25, 2017)
 ---
 

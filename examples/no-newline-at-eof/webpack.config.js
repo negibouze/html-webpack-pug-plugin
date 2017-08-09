@@ -24,6 +24,11 @@ module.exports = {
       template: 'template.pug',
       filetype: 'pug'
     }),
+    new HtmlWebpackPlugin({
+      title: 'HtmlWebpackPlugin example',
+      template: 'template-tab.pug',
+      filename: 'index-tab.pug'
+    }),
     new HtmlWebpackPugPlugin()
   ]
 };

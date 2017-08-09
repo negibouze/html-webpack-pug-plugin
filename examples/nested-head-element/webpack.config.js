@@ -29,6 +29,11 @@ module.exports = {
       filename: 'layout2.pug',
       inject: 'body'
     }),
+    new HtmlWebpackPlugin({
+      template: 'template2-tab.pug',
+      filename: 'layout2-tab.pug',
+      inject: 'body'
+    }),
     new HtmlWebpackPugPlugin()
   ]
 };

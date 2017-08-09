@@ -90,10 +90,29 @@ HtmlWebpackPugPlugin.prototype.postProcessHtml = function (htmlPluginData, callb
  */
 HtmlWebpackPugPlugin.prototype.adjustElementsIndentation = function (html) {
   var self = this;
+  html = self.deleteExtraNewlines(html);
   html = self.adjustHeadElementsIndentation(html);
   html = self.adjustBodyElementsIndentation(html);
   return html;
 };
+
+/**
+ * Delete trailing extra newlines
+ * e.g.
+ *  before
+ *   #footer
+ *     Footer content
+ *
+ *
+ *  after
+ *   #footer
+ *     Footer content
+ *
+ * @param html htmlPluginData.html (Pug/Jade)
+ */
+HtmlWebpackPugPlugin.prototype.deleteExtraNewlines = function (html) {
+  return html.replace(/(\r?\n){2,}$/im, '$1');
+}
 
 /**
  * Adjust head elements indentation
@@ -118,7 +137,7 @@ HtmlWebpackPugPlugin.prototype.adjustElementsIndentation = function (html) {
  */
 HtmlWebpackPugPlugin.prototype.adjustHeadElementsIndentation = function (html) {
   var self = this;
-  var regExp = /^( *head\n)( *)([\s\S]*)(\n *body)/im;
+  var regExp = /^([ |\t]*head\n)([ |\t]*)([\s\S]*)(\n[ |\t]*body)/im;
   var match = regExp.exec(html);
   if (match) {
     var indent = match[2];
@@ -133,7 +152,7 @@ HtmlWebpackPugPlugin.prototype.adjustHeadElementsIndentation = function (html) {
 
 /**
  * Adjust body elements indentation
- * !Operation guarantee of this function is limited 
+ * !Operation guarantee of this function is limited
  * e.g.
  *  before
  *      body#body.main
@@ -170,9 +189,9 @@ HtmlWebpackPugPlugin.prototype.adjustHeadElementsIndentation = function (html) {
 HtmlWebpackPugPlugin.prototype.adjustBodyElementsIndentation = function (html) {
   var self = this;
   var regExp = function(html) {
-    var h = /^( *)head/im.exec(html);
-    var topSpace = h ? h[1] : ' *';
-    return new RegExp('^(' + topSpace + ')(body.*\\n)( *[\\s\\S]*)', 'im');;
+    var h = /^([ |\t]*)head/im.exec(html);
+    var topSpace = h ? h[1] : '[ |\t]*';
+    return new RegExp('^(' + topSpace + ')(body.*\\n)([ |\t]*[\\s\\S]*)', 'im');;
   }(html);
   var match = regExp.exec(html);
   if (match) {
@@ -193,7 +212,7 @@ HtmlWebpackPugPlugin.prototype.adjustBodyElementsIndentation = function (html) {
         newElements.push(elm.trim());
         continue;
       }
-      var m = /^( *).*$/i.exec(elm);
+      var m = /^([ |\t]*).*$/i.exec(elm);
       // If the indentation is shallower than the body
       if (padding || (m && (m[1].length < indent.length))) {
         // After that, add indentation to all elements
@@ -306,8 +325,8 @@ HtmlWebpackPugPlugin.prototype.removeUnnecessaryTags = function (html) {
 HtmlWebpackPugPlugin.prototype.injectAssets = function (html, head, body, assets) {
   var self = this;
   var regExp = function(html) {
-    var h = /^( *)head/im.exec(html);
-    var topSpace = h ? h[1] : ' *';
+    var h = /^([ |\t]*)head/im.exec(html);
+    var topSpace = h ? h[1] : '[ |\t]*';
     return new RegExp('^(' + topSpace + ')(body)\\b', 'im');;
   }(html);
   var match = regExp.exec(html);
