@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title ots-box-office
+    link(href="styles.css" rel="stylesheet")
+  body
+    #app
+    // built files will be auto injected
+    script(src='https://js.stripe.com/v3/')
+    script.
+      window.__API__ = !{self.htmlWebpackPlugin.options ? self.htmlWebpackPlugin.options.__API__ : __API__};
+      window.__STRIPE_API_KEY__ = !{self.htmlWebpackPlugin.options ? self.htmlWebpackPlugin.options.__STRIPE_API_KEY__ : __STRIPE_API_KEY__};
+      window.__OTS_URL__ = !{self.htmlWebpackPlugin.options ? self.htmlWebpackPlugin.options.__OTS_URL__ : __OTS_URL__};
+      window.__EVENT__ = !{self.htmlWebpackPlugin.options ? self.htmlWebpackPlugin.options.__EVENT__ : __EVENT__};
+    script(type="text/javascript" src="bundle.js")
