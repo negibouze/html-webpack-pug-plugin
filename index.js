@@ -332,7 +332,7 @@ HtmlWebpackPugPlugin.prototype.injectAssets = function (html, head, body, assets
   var match = regExp.exec(html);
   if (match) {
     var headSpace = match[1];
-    var hlSpace = headSpace.repeat(2);
+    var hlSpace = headSpace + "  ";
     if (head.length) {
       head = head.map(function(v) {
         return hlSpace + v;
