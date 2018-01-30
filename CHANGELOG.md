@@ -1,6 +1,21 @@
 Change History
 ==============
 
+v0.2.2 (Jan 30, 2018)
+---
+
+### Breaking Changes
+
+* None.
+
+### Enhancements
+
+* None.
+
+### Bug Fixes
+
+* Indentation of link and script is not working properly [#14](https://github.com/negibouze/html-webpack-pug-plugin/issues/14)
+
 v0.2.1 (Aug 9, 2017)
 ---
 
