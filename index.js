@@ -9,15 +9,16 @@ function HtmlWebpackPugPlugin (options) {
 HtmlWebpackPugPlugin.prototype.apply = function (compiler) {
   var self = this;
   // Hook into the html-webpack-plugin processing
-  compiler.plugin('compilation', function (compilation) {
-    compilation.plugin('html-webpack-plugin-before-html-processing', function (htmlPluginData, callback) {
+  compiler.hooks.compilation.tap('compilation', function (compilation) {
+    compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tapAsync('html-webpack-plugin-before-html-processing', function (htmlPluginData, callback) {
       self.preProcessHtml(htmlPluginData, callback);
     });
-    compilation.plugin('html-webpack-plugin-after-html-processing', function (htmlPluginData, callback) {
+    compilation.hooks.htmlWebpackPluginAfterHtmlProcessing.tapAsync('html-webpack-plugin-after-html-processing', function (htmlPluginData, callback) {
       self.postProcessHtml(htmlPluginData, callback);
     });
   });
 };
+
 
 /**
  * Is it no longer supported
