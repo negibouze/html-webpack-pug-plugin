@@ -1,6 +1,21 @@
 Change History
 ==============
 
+v0.3.0 (Feb 02, 2018)
+---
+
+### Breaking Changes
+
+* None.
+
+### Enhancements
+
+* Supported Webpack 4.
+
+### Bug Fixes
+
+* Support for Webpack 4? [#15](https://github.com/negibouze/html-webpack-pug-plugin/issues/15)
+
 v0.2.2 (Jan 30, 2018)
 ---
 

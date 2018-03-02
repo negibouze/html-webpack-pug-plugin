@@ -17,11 +17,12 @@ var examples = fs.readdirSync(__dirname).filter(function (file) {
 });
 
 try {
+  var mode = (webpackMajorVersion === '4') ? ' --mode production' : '';
   examples.forEach(function (exampleName) {
     var examplePath = path.join(__dirname, exampleName);
     var configFile = path.join(examplePath, 'webpack.config.js');
     rimraf.sync(path.join(examplePath, 'dist', 'webpack-' + webpackMajorVersion));
-    execSync(webpackBin + ' --context "' + examplePath + '" --config "' + configFile + '"');
+    execSync(webpackBin + ' --context "' + examplePath + '" --config "' + configFile + '"' + mode);
   });
 } catch(e) {
   console.log(e);

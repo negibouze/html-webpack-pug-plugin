@@ -12,9 +12,9 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
-    loaders: [
-      { test: /\.css$/, loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' }) },
-      { test: /\.png$/, loader: 'file-loader' }
+    rules: [
+      { test: /\.css$/, use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' }) },
+      { test: /\.png$/, use: 'file-loader' }
     ]
   },
   plugins: [
