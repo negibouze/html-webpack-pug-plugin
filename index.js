@@ -7,30 +7,49 @@ function HtmlWebpackPugPlugin (options) {
 }
 
 HtmlWebpackPugPlugin.prototype.apply = function (compiler) {
+  var pluginName = 'HtmlWebpackPugPlugin';
   var self = this;
   // Hook into the html-webpack-plugin processing
-  var beforeProcessing = {
-    name: 'html-webpack-plugin-before-html-processing',
-    cb: function (htmlPluginData, callback) {
-      self.preProcessHtml(htmlPluginData, callback);
-    }
+  var beforeAssetsInjection = function (htmlPluginData, callback) {
+    self.preProcessHtml(htmlPluginData, callback);
   }
-  var afterProcessing = {
-    name: 'html-webpack-plugin-after-html-processing',
-    cb: function (htmlPluginData, callback) {
-      self.postProcessHtml(htmlPluginData, callback);
-    }
+  var afterAssetsInjection = function (htmlPluginData, callback) {
+    self.postProcessHtml(htmlPluginData, callback);
   }
+  // Webpack 4+
   if (compiler.hooks) {
-    // setup hooks for webpack 4
-    compiler.hooks.compilation.tap('HtmlWebpackPugPlugin', function (compilation) {
-      compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tapAsync(beforeProcessing.name, beforeProcessing.cb);
-      compilation.hooks.htmlWebpackPluginAfterHtmlProcessing.tapAsync(afterProcessing.name, afterProcessing.cb);
+    compiler.hooks.compilation.tap(pluginName, function (compilation) {
+      var myHooks = (function (comp) {
+        if (comp.hooks.htmlWebpackPluginBeforeHtmlGeneration) {
+          // HtmlWebPackPlugin 3.x
+          return [
+            { hook: comp.hooks.htmlWebpackPluginBeforeHtmlProcessing, func: beforeAssetsInjection},
+            { hook: comp.hooks.htmlWebpackPluginAfterHtmlProcessing, func: afterAssetsInjection},
+          ];
+        } else {
+          // HtmlWebPackPlugin 4.x
+          var HtmlWebpackPlugin = require('html-webpack-plugin');
+          var hooks = HtmlWebpackPlugin.getHooks(comp);
+          var log = function (htmlPluginData, callback) {
+            console.log('\n' + '***** Hook *****' + '\n');
+            console.log(htmlPluginData);
+            callback(null, htmlPluginData);
+          }
+          return [
+            { hook: hooks.afterTemplateExecution, func: beforeAssetsInjection},
+            { hook: hooks.beforeEmit, func: afterAssetsInjection},
+            // { hook: hooks.afterEmit, func: log},
+          ];
+        }
+      })(compilation);
+      myHooks.forEach(function (v) {
+        v.hook.tapAsync(pluginName, v.func);
+      })
     });
   } else {
     compiler.plugin('compilation', function (compilation) {
-      compilation.plugin(beforeProcessing.name, beforeProcessing.cb);
-      compilation.plugin(afterProcessing.name, afterProcessing.cb);
+      compilation.plugin('html-webpack-plugin-before-html-processing', beforeAssetsInjection);
+      compilation.plugin('html-webpack-plugin-after-html-processing', afterAssetsInjection);
     });
   }
 };
@@ -76,7 +95,11 @@ Haml: [html-webpack-haml-plugin](https://www.npmjs.com/package/html-webpack-haml
     throw new Error(message);
   }
   if (self.isProcessingTarget(htmlPluginData)) {
+    // console.log('\n' + '***** Before Adjust *****' + '\n');
+    // console.log(htmlPluginData.html);
     htmlPluginData.html = self.adjustElementsIndentation(htmlPluginData.html);
+    // console.log('\n' + '***** After Adjust *****' + '\n');
+    // console.log(htmlPluginData.html);
   }
   callback(null, htmlPluginData);
 };
@@ -152,7 +175,6 @@ HtmlWebpackPugPlugin.prototype.deleteExtraNewlines = function (html) {
  * @param html htmlPluginData.html (Pug/Jade)
  */
 HtmlWebpackPugPlugin.prototype.adjustHeadElementsIndentation = function (html) {
-  var self = this;
   var regExp = /^([ |\t]*head\n)([ |\t]*)([\s\S]*)(\n[ |\t]*body)/im;
   var match = regExp.exec(html);
   if (match) {
@@ -203,7 +225,6 @@ HtmlWebpackPugPlugin.prototype.adjustHeadElementsIndentation = function (html) {
  * @param html htmlPluginData.html (Pug/Jade)
  */
 HtmlWebpackPugPlugin.prototype.adjustBodyElementsIndentation = function (html) {
-  var self = this;
   var regExp = function(html) {
     var h = /^([ |\t]*)head/im.exec(html);
     var topSpace = h ? h[1] : '[ |\t]*';
@@ -377,7 +398,7 @@ HtmlWebpackPugPlugin.prototype.injectAssets = function (html, head, body, assets
   }
 
   // Inject manifest into the opening html tag
-  html = self.injectManifest(html, assets);
+  // html = self.injectManifest(html, assets);
   return html;
 };
 
