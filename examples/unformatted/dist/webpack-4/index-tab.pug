@@ -2,12 +2,30 @@ doctype html
 html(lang="en")
 	head
 		meta(charset="utf-8")
-	meta(http-equiv="X-UA-Compatible" content="IE=edge")
+		meta(http-equiv="X-UA-Compatible" content="IE=edge")
 		meta(name="viewport" content="width=device-width, initial-scale=1")
-	meta(name="description" content="Webpack App")
-		title Bodyweight training
+		meta(name="description" content="Webpack App")
+		style(type="text/css").
+			body {
+				font-size: 13px;
+			}
+		script(type="text/javascript").
+			var MY_VAR = 'foobar';
+		title
+			block title
 		link(href="styles.css" rel="stylesheet")
-	body
+	body#body.main
+		h1 Main
 		img(src="logo.png")
-		h1 use template
+		h1 Pug - node template engine
+		#container.col
+			if youAreUsingPug
+				p You are amazing
+			else
+				p Get on it!
+			p.
+				Pug is a terse and simple templating language with a
+				strong focus on performance and powerful features.
+		#footer
+			Footer content
 		script(type="text/javascript" src="bundle.js")
