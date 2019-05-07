@@ -30,15 +30,9 @@ HtmlWebpackPugPlugin.prototype.apply = function (compiler) {
           // HtmlWebPackPlugin 4.x
           var HtmlWebpackPlugin = require('html-webpack-plugin');
           var hooks = HtmlWebpackPlugin.getHooks(comp);
-          var log = function (htmlPluginData, callback) {
-            console.log('\n' + '***** Hook *****' + '\n');
-            console.log(htmlPluginData);
-            callback(null, htmlPluginData);
-          }
           return [
             { hook: hooks.afterTemplateExecution, func: beforeAssetsInjection},
             { hook: hooks.beforeEmit, func: afterAssetsInjection},
-            // { hook: hooks.afterEmit, func: log},
           ];
         }
       })(compilation);
@@ -95,6 +89,8 @@ Haml: [html-webpack-haml-plugin](https://www.npmjs.com/package/html-webpack-haml
     throw new Error(message);
   }
   if (self.isProcessingTarget(htmlPluginData)) {
+    // do not minify
+    htmlPluginData.plugin.options.minify = false;
     // console.log('\n' + '***** Before Adjust *****' + '\n');
     // console.log(htmlPluginData.html);
     htmlPluginData.html = self.adjustElementsIndentation(htmlPluginData.html);
@@ -277,7 +273,7 @@ HtmlWebpackPugPlugin.prototype.createPugTag = function (tag) {
 HtmlWebpackPugPlugin.prototype.injectAssetsIntoFile = function (htmlPluginData) {
   var self = this;
   var options = htmlPluginData.plugin.options;
-  var assets = htmlPluginData.assets
+  var assets = self.getAssets(htmlPluginData);
   var html = htmlPluginData.html;
   var hasTemplate = self.hasTemplate(options.template);
   if (!hasTemplate) {
@@ -314,6 +310,24 @@ doctype html\n\
 html\n\
   head\n\
   body';
+};
+
+/**
+ * Get Assets
+ * @param html htmlPluginData
+ */
+HtmlWebpackPugPlugin.prototype.getAssets = function (htmlPluginData) {
+  if (htmlPluginData.assets) {
+    return htmlPluginData.assets;
+  }
+  return (function (str) {
+    var regExp = /([\w-]*\.appcache)/i;
+    var match = regExp.exec(str);
+    if (!match || match.length < 2) {
+      return undefined;
+    }
+    return { manifest: match[1] };
+  })(htmlPluginData.plugin.assetJson);
 };
 
 /**
@@ -357,7 +371,7 @@ HtmlWebpackPugPlugin.prototype.removeUnnecessaryTags = function (html) {
  * @param html htmlPluginData.html (Pug/Jade)
  * @param head inject in the head tag (e.g. style tag)
  * @param body inject in the body tag (e.g. script tag)
- * @param assets
+ * @param manifest
  */
 HtmlWebpackPugPlugin.prototype.injectAssets = function (html, head, body, assets) {
   var self = this;
@@ -398,17 +412,19 @@ HtmlWebpackPugPlugin.prototype.injectAssets = function (html, head, body, assets
   }
 
   // Inject manifest into the opening html tag
-  // html = self.injectManifest(html, assets);
+  if (assets) {
+    html = self.injectManifest(html, assets.manifest);
+  }
   return html;
 };
 
 /**
  * Inject manifest into the opening html tag
  * @param html htmlPluginData.html (Pug/Jade)
- * @param assets
+ * @param manifest
  */
-HtmlWebpackPugPlugin.prototype.injectManifest = function (html, assets) {
-  if (!assets.manifest) {
+HtmlWebpackPugPlugin.prototype.injectManifest = function (html, manifest) {
+  if (!manifest) {
     return html;
   }
   return html.replace(/^([ |\t]*html.*)$/im, function (match, p1) {
@@ -421,9 +437,9 @@ HtmlWebpackPugPlugin.prototype.injectManifest = function (html, assets) {
     if (match) {
       var elements = match.filter(function(v) { return v != undefined });
       if (elements.length <= 3) {
-        return elements[1] + '(manifest="' + assets.manifest + '")';
+        return elements[1] + '(manifest="' + manifest + '")';
       };
-      return elements[1] + elements[2].trim() + ' manifest="' + assets.manifest + '"' + elements[3];
+      return elements[1] + elements[2].trim() + ' manifest="' + manifest + '"' + elements[3];
     }
     return match;
   });
