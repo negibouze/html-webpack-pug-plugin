@@ -21,13 +21,7 @@ module.exports = {
     new ExtractTextPlugin('styles.css'),
     new HtmlWebpackPlugin(),
     new HtmlWebpackPlugin({
-      filetype: 'pug'
-    }),
-    new HtmlWebpackPlugin({
       filename: 'output.pug'
-    }),
-    new HtmlWebpackPlugin({
-      filetype: 'jade'
     }),
     new HtmlWebpackPlugin({
       filename: 'output.jade'

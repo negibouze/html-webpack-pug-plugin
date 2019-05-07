@@ -22,7 +22,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'HtmlWebpackPlugin example',
       template: 'template.pug',
-      filetype: 'pug'
+      filename: 'index.pug'
     }),
     new HtmlWebpackPlugin({
       title: 'HtmlWebpackPlugin example',

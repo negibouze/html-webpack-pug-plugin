@@ -28,7 +28,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'template-pug.js',
       title: 'javascript advanced example',
-      filetype: 'pug'
+      filename: 'index.pug'
     }),
     new HtmlWebpackPugPlugin()
   ]

@@ -40,11 +40,8 @@ import HtmlWebpackPugPlugin from 'html-webpack-pug-plugin';
 Add the plugin to your webpack config as follows:
 
 ```javascript
-// Please specify filetype 'pug' or filename '*.pug'.
+// Please specify filename '*.pug'.
 plugins: [
-  new HtmlWebpackPlugin({
-    filetype: 'pug'
-  }),
   new HtmlWebpackPlugin({
     filename: 'output.pug'
   }),
@@ -58,7 +55,7 @@ Even if you generate multiple files make sure that you add the HtmlWebpackPugPlu
 plugins: [
   new HtmlWebpackPlugin({
     template: 'src/views/test.pug',
-    filetype: 'pug'
+    filename: 'output.pug'
   }),
   new HtmlWebpackPlugin({
     template: 'src/views/test.pug',
@@ -78,9 +75,9 @@ doctype html
 html
   head
     meta(charset="utf-8")
-    link(href="bundle.css" rel="stylesheet")
+    link(href="styles.css" rel="stylesheet")
   body
-    script(type="text/javascript" src="bundle.js")
+    script(src="bundle.js")
 ```
 
 If you are interested, look at examples.

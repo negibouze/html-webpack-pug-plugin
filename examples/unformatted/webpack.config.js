@@ -21,13 +21,12 @@ module.exports = {
     new ExtractTextPlugin('styles.css'),
     new HtmlWebpackPlugin({
       template: 'template.pug',
-      filetype: 'pug',
-      minify: false,
+      filename: 'index.pug'
     }),
-    // new HtmlWebpackPlugin({
-    //   template: 'template-tab.pug',
-    //   filename: 'index-tab.pug'
-    // }),
+    new HtmlWebpackPlugin({
+      template: 'template-tab.pug',
+      filename: 'index-tab.pug'
+    }),
     new HtmlWebpackPugPlugin()
   ]
 };

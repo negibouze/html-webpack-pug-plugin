@@ -26,7 +26,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       favicon: 'favicon.ico',
       template: 'template.pug',
-      filetype: 'pug'
+      filename: 'index.pug'
     }),
     new HtmlWebpackPugPlugin()
   ]
