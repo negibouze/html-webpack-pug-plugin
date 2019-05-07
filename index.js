@@ -91,11 +91,7 @@ Haml: [html-webpack-haml-plugin](https://www.npmjs.com/package/html-webpack-haml
   if (self.isProcessingTarget(htmlPluginData)) {
     // do not minify
     htmlPluginData.plugin.options.minify = false;
-    // console.log('\n' + '***** Before Adjust *****' + '\n');
-    // console.log(htmlPluginData.html);
     htmlPluginData.html = self.adjustElementsIndentation(htmlPluginData.html);
-    // console.log('\n' + '***** After Adjust *****' + '\n');
-    // console.log(htmlPluginData.html);
   }
   callback(null, htmlPluginData);
 };
@@ -171,15 +167,17 @@ HtmlWebpackPugPlugin.prototype.deleteExtraNewlines = function (html) {
  * @param html htmlPluginData.html (Pug/Jade)
  */
 HtmlWebpackPugPlugin.prototype.adjustHeadElementsIndentation = function (html) {
-  var regExp = /^([ |\t]*head\n)([ |\t]*)([\s\S]*)(\n[ |\t]*body)/im;
+  var regExp = /^(([ |\t]*)html.*\n)(([ |\t]*)head\n)[ |\t]*([\s\S]*)(\n[ |\t]*body)/im;
   var match = regExp.exec(html);
   if (match) {
-    var indent = match[2];
-    var elements = match[3].split('\n').map(function(v) {
-      var m = /^([\s]*).*$/g.exec(v);
-      return (m[1] === '' ? indent : '') + v.replace(/[ 　]+$/, '');
+    var nextIndent = match[4].repeat(2).replace(match[2], '');
+    var elements = match[5].split('\n').map(function(v) {
+      if (/^[ |\t]+title|style|meta|link|script|base/.test(v)) {
+        return v.replace(/^[ |\t]*/, nextIndent).replace(/[ |　|\t]+$/, '');
+      }
+      return v;
     });
-    html = html.replace(regExp, match[1] + elements.join('\n') + match[4]);
+    html = html.replace(regExp, match[1] + match[3] + elements.join('\n') + match[6]);
   }
   return html;
 }
