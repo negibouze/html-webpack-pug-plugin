@@ -172,7 +172,7 @@ HtmlWebpackPugPlugin.prototype.adjustHeadElementsIndentation = function (html) {
   if (match) {
     var nextIndent = match[4].repeat(2).replace(match[2], '');
     var elements = match[5].split('\n').map(function(v) {
-      if (/^[ |\t]+title|style|meta|link|script|base/.test(v)) {
+      if (/^[ |\t]*(title|style|meta|link|script|base)/.test(v)) {
         return v.replace(/^[ |\t]*/, nextIndent).replace(/[ |　|\t]+$/, '');
       }
       return v;
