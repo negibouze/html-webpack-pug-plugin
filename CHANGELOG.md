@@ -1,6 +1,21 @@
 Change History
 ==============
 
+v1.0.0 (May 09, 2019)
+---
+
+### Breaking Changes
+
+* The option "filetype" is no longer available (with HTML Webpack Plugin v4).
+
+### Enhancements
+
+* Supported HTML Webpack Plugin v4.
+
+### Bug Fixes
+
+* Support for html-webpack-plugin @next (v4) [#19](https://github.com/negibouze/html-webpack-pug-plugin/issues/19)
+
 v0.3.0 (Feb 02, 2018)
 ---
 
@@ -10,7 +25,7 @@ v0.3.0 (Feb 02, 2018)
 
 ### Enhancements
 
-* Supported Webpack 4.
+* Supported Webpack v4.
 
 ### Bug Fixes
 
