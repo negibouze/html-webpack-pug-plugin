@@ -167,7 +167,7 @@ HtmlWebpackPugPlugin.prototype.deleteExtraNewlines = function (html) {
  * @param html htmlPluginData.html (Pug/Jade)
  */
 HtmlWebpackPugPlugin.prototype.adjustHeadElementsIndentation = function (html) {
-  var regExp = /^(([ |\t]*)html.*\n)(([ |\t]*)head\n)[ |\t]*([\s\S]*)(\n[ |\t]*body)/im;
+  var regExp = /^(([ |\t]*)html.*\n)(([ |\t]*)head\n)([ |\t]*[\s\S]*)(\n[ |\t]*body)/im;
   var match = regExp.exec(html);
   if (match) {
     var nextIndent = match[4].repeat(2).replace(match[2], '');
