@@ -1,6 +1,21 @@
 Change History
 ==============
 
+v1.0.1 (May 14, 2019)
+---
+
+### Breaking Changes
+
+* None.
+
+### Enhancements
+
+* None.
+
+### Bug Fixes
+
+* Line after head is not indented [#20](https://github.com/negibouze/html-webpack-pug-plugin/issues/20)
+
 v1.0.0 (May 09, 2019)
 ---
 
