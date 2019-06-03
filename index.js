@@ -122,7 +122,7 @@ HtmlWebpackPugPlugin.prototype.postProcessHtml = function (htmlPluginData, callb
 HtmlWebpackPugPlugin.prototype.adjustElementsIndentation = function (html) {
   var self = this;
   html = self.deleteExtraNewlines(html);
-  html = self.adjustHeadElementsIndentation(html);
+  // html = self.adjustHeadElementsIndentation(html);
   html = self.adjustBodyElementsIndentation(html);
   return html;
 };
