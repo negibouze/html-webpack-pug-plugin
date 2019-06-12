@@ -546,7 +546,7 @@ html\n\
   }
 
   getIndentChar (html) {
-    var regExp = /^[ |\t]*html.*\n([ |\t]*)head/im;
+    var regExp = /^[ |\t]*html.*\n([ |\t]*)[^( |\t)]/im;
     var match = regExp.exec(html);
     if (!match || match.length < 2) {
       return '  ';
