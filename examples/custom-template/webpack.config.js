@@ -30,6 +30,8 @@ module.exports = {
       template: 'template-tab.pug',
       filename: 'index-tab.pug'
     }),
-    new HtmlWebpackPugPlugin()
+    new HtmlWebpackPugPlugin({
+      adjustIndent: true
+    })
   ]
 };

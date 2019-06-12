@@ -34,6 +34,8 @@ module.exports = {
       filename: 'layout2-tab.pug',
       inject: 'body'
     }),
-    new HtmlWebpackPugPlugin()
+    new HtmlWebpackPugPlugin({
+      adjustIndent: true
+    })
   ]
 };

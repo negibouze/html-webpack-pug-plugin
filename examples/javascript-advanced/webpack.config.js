@@ -30,6 +30,8 @@ module.exports = {
       title: 'javascript advanced example',
       filename: 'index.pug'
     }),
-    new HtmlWebpackPugPlugin()
+    new HtmlWebpackPugPlugin({
+      adjustIndent: true
+    })
   ]
 };
