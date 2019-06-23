@@ -10,7 +10,7 @@ v2.0.0 (June 24, 2019)
 
 ### Enhancements
 
-* Add options (details are described in Readme.md).
+* Add options (details are described in [Readme](https://github.com/negibouze/html-webpack-pug-plugin/blob/master/README.md)).
 
 ### Bug Fixes
 
