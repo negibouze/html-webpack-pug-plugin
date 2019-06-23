@@ -1,6 +1,22 @@
 Change History
 ==============
 
+v2.0.0 (June 24, 2019)
+---
+
+### Breaking Changes
+
+* Adjustment of indent is now off by default.
+
+### Enhancements
+
+* Add options (details are described in Readme.md).
+
+### Bug Fixes
+
+* style is not indented properly if applying style on the body [#22](https://github.com/negibouze/html-webpack-pug-plugin/issues/22)
+* Broken indentation with each expression [#23](https://github.com/negibouze/html-webpack-pug-plugin/issues/23)
+
 v1.0.1 (May 14, 2019)
 ---
 

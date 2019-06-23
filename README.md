@@ -31,9 +31,9 @@ Require the plugin in your webpack config:
 var HtmlWebpackPugPlugin = require('html-webpack-pug-plugin');
 ```
 
-ES2015
+ES2015 or later
 
-```es2015
+```javascript
 import HtmlWebpackPugPlugin from 'html-webpack-pug-plugin';
 ```
 
@@ -63,6 +63,35 @@ plugins: [
   }),
   new HtmlWebpackPugPlugin()
 ]  
+```
+
+Options
+-----
+| Name | Type | Default | Description |
+|:---:|:---:|:---:|:---|
+| `ast` | `{Boolean}` | `false` | if `true`  it uses ast ([pug-source-gen](https://github.com/pugjs/pug-source-gen) is used, but sometimes it does not work well because it is not maintained). |
+| `adjustIndent` | `{Boolean}` | `false` | if `true` the indent will be adjusted automatically (sometimes it does not work well). |
+
+Here's an example webpack config illustrating how to use these options
+
+***webpack.config.js***
+```javascript
+{
+  entry: 'index.js',
+  output: {
+    path: __dirname + '/dist',
+    filename: 'bundle.js'
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'template.pug',
+      filename: 'index.pug'
+    }),
+    new HtmlWebpackPugPlugin({
+      adjustIndent: true
+    })
+  ]
+}
 ```
 
 Output Example
