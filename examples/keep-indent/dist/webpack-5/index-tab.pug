@@ -1,0 +1,67 @@
+- var info = { description: 'foo bar baz' }
+- var user = { name: 'user name', isAnonymous: false }
+doctype html
+html(lang="en")
+	head
+		each favsize in [57, 60, 72, 76, 114, 120, 144, 152, 180]
+			link(rel='apple-touch-icon', sizes=favsize + 'x' + favsize, href='/favicons/apple-icon-' + favsize + 'x' + favsize + '.png')
+		link(rel='icon', type='image/png', sizes='192x192', href='/favicons/android-icon-192x192.png')
+		each favsize in [32, 96, 16]
+			link(rel='icon', type='image/png', sizes=favsize + 'x' + favsize, href='/favicons/favicon-' + favsize + 'x' + favsize + '.png')
+		link(rel='manifest', href='/manifest.json')
+		if info.description
+			meta(name="description" content=user.description)
+		else
+			meta(name="description" content="default description")
+		link(href="main.css" rel="stylesheet")
+	body
+		img(src="logo.png")
+		h1 use template
+		p
+			| The pipe always goes at the beginning of its own line,
+			| not counting indentation.
+
+		unless user.isAnonymous
+			p You're logged in as #{user.name}
+		input(
+			type='checkbox'
+			name='agreement'
+			checked
+		)
+
+		input(data-json=`
+			{
+				"very-long": "piece of ",
+				"data": true
+			}
+		`)
+
+		- var friends = 10
+		case friends
+			when 0
+				- break
+			when 1
+				p you have very few friends
+			default: p you have #{friends} friends
+
+		//-
+			Comments for your template writers.
+			Use as much text as you want.
+		//
+			Comments for your HTML readers.
+			Use as much text as you want.
+
+		ul
+			each val, index in ['zero', 'one', 'two']
+				li= index + ': ' + val
+
+		//- Declaration
+		mixin list
+			ul
+				li foo
+				li bar
+				li baz
+		//- Use
+		+list
+		+list
+		script(src="bundle.js")

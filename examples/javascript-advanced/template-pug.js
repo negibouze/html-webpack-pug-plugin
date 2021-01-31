@@ -1,5 +1,5 @@
 // Webpack require:
-var partial = require('html-loader!./partial.pug');
+var partial = require('html-loader?-minimize!./partial.pug');
 var universal = require('./universial.js');
 
 // Export a function / promise / or a string:
