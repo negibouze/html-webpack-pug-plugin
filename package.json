@@ -1,6 +1,6 @@
 {
   "name": "html-webpack-pug-plugin",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Simplifies creation of Pug/Jade files to serve your webpack bundles(Extension of html-webpack-plugin)",
   "main": "index.js",
   "files": [

@@ -1,6 +1,21 @@
 Change History
 ==============
 
+v2.0.1 (Jan 31, 2021)
+---
+
+### Breaking Changes
+
+* None.
+
+### Enhancements
+
+* None.
+
+### Bug Fixes
+
+* Peer dependencies: include Webpack ^5.0.0 [#25](https://github.com/negibouze/html-webpack-pug-plugin/issues/25)
+
 v2.0.0 (June 24, 2019)
 ---
 
