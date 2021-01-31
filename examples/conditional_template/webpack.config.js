@@ -1,8 +1,8 @@
 var path = require('path');
 var AppCachePlugin = require('appcache-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var HtmlWebpackPugPlugin = require('../..');
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var webpackMajorVersion = require('webpack/package.json').version.split('.')[0];
 
 module.exports = {
@@ -14,14 +14,14 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.css$/, use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' }) },
-      { test: /\.png$/, use: 'file-loader?name=[name].[ext]' },
-      { test: /\.html$/, use: 'html-loader?-removeOptionalTags' }
+      { test: /\.css$/i, use: [MiniCssExtractPlugin.loader, 'css-loader'] },
+      { test: /\.png$/i, type: 'asset/resource' },
+      { test: /\.html$/i, loader: 'html-loader' }
     ]
   },
   plugins: [
     new AppCachePlugin(),
-    new ExtractTextPlugin('styles.css'),
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: 'template.pug',
       filename: 'index.pug'
