@@ -43,7 +43,8 @@ Add the plugin to your webpack config as follows:
 // Please specify filename '*.pug'.
 plugins: [
   new HtmlWebpackPlugin({
-    filename: 'output.pug'
+    filename: 'output.pug',
+    minify: false
   }),
   new HtmlWebpackPugPlugin()
 ]  
@@ -55,11 +56,13 @@ Even if you generate multiple files make sure that you add the HtmlWebpackPugPlu
 plugins: [
   new HtmlWebpackPlugin({
     template: 'src/views/test.pug',
-    filename: 'output.pug'
+    filename: 'output.pug',
+    minify: false
   }),
   new HtmlWebpackPlugin({
     template: 'src/views/test.pug',
-    filename: 'test.pug'
+    filename: 'test.pug',
+    minify: false
   }),
   new HtmlWebpackPugPlugin()
 ]  
