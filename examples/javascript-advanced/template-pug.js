@@ -1,5 +1,5 @@
 // Webpack require:
-var partial = require('html-loader?-minimize!./partial.pug');
+var partial = require('html-loader?{"minimize":false}!./partial.pug');
 var universal = require('./universial.js');
 
 // Export a function / promise / or a string:
@@ -12,7 +12,7 @@ html(lang="en")\n\
     title ' + templateParams.htmlWebpackPlugin.options.title + '\n\
     meta(content="width=device-width, initial-scale=1" name="viewport")\n\
   body\n\
-    ' + universal() + ' - \n' + partial;
+    ' + universal() + ' - \n' + partial.default;
 
   return template;
 };

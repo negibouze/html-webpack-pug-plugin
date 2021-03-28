@@ -22,17 +22,20 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'template.pug',
       filename: 'layout.pug',
-      inject: 'head'
+      inject: 'head',
+      minify: false
     }),
     new HtmlWebpackPlugin({
       template: 'template2.pug',
       filename: 'layout2.pug',
-      inject: 'body'
+      inject: 'body',
+      minify: false
     }),
     new HtmlWebpackPlugin({
       template: 'template2-tab.pug',
       filename: 'layout2-tab.pug',
-      inject: 'body'
+      inject: 'body',
+      minify: false
     }),
     new HtmlWebpackPugPlugin({
       adjustIndent: true

@@ -17,7 +17,7 @@ var examples = fs.readdirSync(__dirname).filter(function (file) {
 });
 
 try {
-  var mode = (webpackMajorVersion === '4') ? ' --mode production' : '';
+  var mode = (webpackMajorVersion !== '3') ? ' --mode production' : '';
   examples.forEach(function (exampleName) {
     var examplePath = path.join(__dirname, exampleName);
     var configFile = path.join(examplePath, 'webpack.config.js');

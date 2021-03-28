@@ -34,7 +34,6 @@ class HtmlWebpackPugPlugin {
               { hook: comp.hooks.htmlWebpackPluginAfterHtmlProcessing, func: afterAssetsInjection},
             ];
           } else {
-            // HtmlWebPackPlugin 4.x
             var HtmlWebpackPlugin = require('html-webpack-plugin');
             var hooks = HtmlWebpackPlugin.getHooks(comp);
             return [
@@ -286,19 +285,16 @@ Haml: [html-webpack-haml-plugin](https://www.npmjs.com/package/html-webpack-haml
     if (!hasTemplate) {
       html = html.replace(/\r?\n[ ]*/g, '');
     }
-  
-    var styles = self.headExtraction(html).map(function (e) {
+    var tagsOfHead = self.headExtraction(html).map(function (e) {
       return e.match(/title>.*<\/title/i) ? 'title ' + options.title : e;
     });
-    var scripts = htmlPluginData.plugin.options.inject !== 'head' ? self.bodyExtraction(html) : [];
+    var tagsOfBody = htmlPluginData.plugin.options.inject !== 'head' ? self.bodyExtraction(html) : [];
     var file = hasTemplate ? self.removeUnnecessaryTags(html) : self.defaultTemplate();
-  
-    styles = styles.map(self.createPugTag);
-    scripts = scripts.map(self.createPugTag);
-  
+    tagsOfHead = tagsOfHead.map(self.createPugTag);
+    tagsOfBody = tagsOfBody.map(self.createPugTag);
     return this.options.ast
-      ? self.injectAssetsUsingAST (file, styles, scripts, assets, options.inject)
-      : self.injectAssets(file, styles, scripts, assets);
+      ? self.injectAssetsUsingAST (file, tagsOfHead, tagsOfBody, assets, options.inject)
+      : self.injectAssets(file, tagsOfHead, tagsOfBody, assets);
   };
   
   /**

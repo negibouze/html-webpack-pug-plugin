@@ -13,6 +13,7 @@ html(lang="en")
 			meta(name="description" content=user.description)
 		else
 			meta(name="description" content="default description")
+		script(defer src="bundle.js")
 		link(href="main.css" rel="stylesheet")
 	body
 		img(src="logo.png")
@@ -64,4 +65,3 @@ html(lang="en")
 		//- Use
 		+list
 		+list
-		script(src="bundle.js")

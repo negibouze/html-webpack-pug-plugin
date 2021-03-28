@@ -4,6 +4,7 @@ html
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     title ots-box-office
+    script(defer src="bundle.js")
     link(href="main.css" rel="stylesheet")
   body
     #app
@@ -14,4 +15,3 @@ html
       window.__STRIPE_API_KEY__ = !{self.htmlWebpackPlugin.options ? self.htmlWebpackPlugin.options.__STRIPE_API_KEY__ : __STRIPE_API_KEY__};
       window.__OTS_URL__ = !{self.htmlWebpackPlugin.options ? self.htmlWebpackPlugin.options.__OTS_URL__ : __OTS_URL__};
       window.__EVENT__ = !{self.htmlWebpackPlugin.options ? self.htmlWebpackPlugin.options.__EVENT__ : __EVENT__};
-    script(src="bundle.js")

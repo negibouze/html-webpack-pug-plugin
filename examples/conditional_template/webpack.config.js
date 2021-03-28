@@ -1,5 +1,4 @@
 var path = require('path');
-var AppCachePlugin = require('appcache-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var HtmlWebpackPugPlugin = require('../..');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -20,15 +19,16 @@ module.exports = {
     ]
   },
   plugins: [
-    new AppCachePlugin(),
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: 'template.pug',
-      filename: 'index.pug'
+      filename: 'index.pug',
+      minify: false
     }),
     new HtmlWebpackPlugin({
       template: 'template-tab.pug',
-      filename: 'index-tab.pug'
+      filename: 'index-tab.pug',
+      minify: false
     }),
     new HtmlWebpackPugPlugin()
   ]
