@@ -7,7 +7,7 @@ var universal = require('./universial.js');
 module.exports = function (templateParams) {
   var html = '<html><head>' +
     '<title>' + templateParams.htmlWebpackPlugin.options.title + '</title>' +
-    '</head><body>' + universal() + ' - ' + partial + '</body></html>';
+    '</head><body>' + universal() + ' - ' + partial.default + '</body></html>';
 
   return html;
 };

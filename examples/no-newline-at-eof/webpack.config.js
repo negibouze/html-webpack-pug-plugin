@@ -22,12 +22,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'HtmlWebpackPlugin example',
       template: 'template.pug',
-      filename: 'index.pug'
+      filename: 'index.pug',
+      minify: false
     }),
     new HtmlWebpackPlugin({
       title: 'HtmlWebpackPlugin example',
       template: 'template-tab.pug',
-      filename: 'index-tab.pug'
+      filename: 'index-tab.pug',
+      minify: false
     }),
     new HtmlWebpackPugPlugin()
   ]

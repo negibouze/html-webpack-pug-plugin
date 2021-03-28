@@ -28,7 +28,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'template-pug.js',
       title: 'javascript advanced example',
-      filename: 'index.pug'
+      filename: 'index.pug',
+      minify: false
     }),
     new HtmlWebpackPugPlugin({
       adjustIndent: true

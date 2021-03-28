@@ -21,19 +21,23 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: 'template1.pug',
-      filename: 'index1.pug'
+      filename: 'index1.pug',
+      minify: false
     }),
     new HtmlWebpackPlugin({
       template: 'template2.pug',
-      filename: 'index2.pug'
+      filename: 'index2.pug',
+      minify: false
     }),
     new HtmlWebpackPlugin({
       template: 'template3.pug',
-      filename: 'index3.pug'
+      filename: 'index3.pug',
+      minify: false
     }),
     new HtmlWebpackPlugin({
       template: 'template4.pug',
-      filename: 'index4.pug'
+      filename: 'index4.pug',
+      minify: false
     }),
     new HtmlWebpackPugPlugin()
   ]

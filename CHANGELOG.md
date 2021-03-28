@@ -1,6 +1,24 @@
 Change History
 ==============
 
+v3.0.0 (Mar 28, 2021)
+---
+
+### Breaking Changes
+
+* Drop support for webpack 4 and node <= 10 (when using html-webpack-plugin 5.0.0 or later).
+* Drop support for appcache-webpack-plugin (when using html-webpack-plugin 5.0.0 or later).
+* Must explicitly specify "minify: false" in the html-webpack-plugin options (when using html-webpack-plugin 5.0.0 or later).
+
+### Enhancements
+
+* Supported HTML Webpack Plugin v5.
+* Updated some examples to use html-loader v2.
+
+### Bug Fixes
+
+* None.
+
 v2.0.1 (Jan 31, 2021)
 ---
 

@@ -21,11 +21,13 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: 'index.jade',
-      filename: 'output.jade'
+      filename: 'output.jade',
+      minify: false
     }),
     new HtmlWebpackPlugin({
       template: 'index-tab.jade',
-      filename: 'output-tab.jade'
+      filename: 'output-tab.jade',
+      minify: false
     }),
     new HtmlWebpackPugPlugin()
   ]

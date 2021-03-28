@@ -6,6 +6,6 @@ var universal = require('./universial.js');
 module.exports = '<!DOCTYPE html>\n\
 <html lang="en">\n\
   <body>\n\
-    ' + universal() + new Date().toISOString() + '\n' + partial + '\
+    ' + universal() + new Date().toISOString() + '\n' + partial.default + '\
   </body>\
 </html>';
