@@ -85,7 +85,8 @@ Here's an example webpack config illustrating how to use these options
   plugins: [
     new HtmlWebpackPlugin({
       template: 'template.pug',
-      filename: 'index.pug'
+      filename: 'index.pug',
+      minify: false
     }),
     new HtmlWebpackPugPlugin({
       adjustIndent: true
