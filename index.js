@@ -1,7 +1,5 @@
 'use strict';
 
-var assert = require('assert');
-
 class HtmlWebpackPugPlugin {
   /**
    * @param {HtmlWebpackOptions} [options]
