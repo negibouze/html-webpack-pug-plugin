@@ -465,8 +465,8 @@ html\n\
    * @param inject htmlPluginData.plugin.options.inject
    */
   injectAssetsUsingAST (html, head, body, assets, inject) {
-    var lexer, parser, walk, generater
-  try {
+    var lexer, parser, walk, generater;
+    try {
       lexer = require('pug-lexer');
       parser = require('pug-parser');
       walk = require('pug-walk');
