@@ -1,6 +1,6 @@
 {
   "name": "html-webpack-pug-plugin",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Simplifies creation of Pug/Jade files to serve your webpack bundles(Extension of html-webpack-plugin)",
   "main": "index.js",
   "files": [
@@ -24,21 +24,19 @@
   ],
   "author": "Yoshiaki Itakura (https://github.com/negibouze)",
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
+    "appcache-webpack-plugin": "^1.4.0",
+    "css-loader": "^6.4.0",
+    "html-loader": "^3.0.0",
+    "html-webpack-plugin": "^5.4.0",
+    "mini-css-extract-plugin": "^2.4.3",
     "pug-lexer": "^5.0.1",
     "pug-parser": "^6.0.0",
     "pug-source-gen": "0.0.2",
-    "pug-walk": "^2.0.0"
-  },
-  "devDependencies": {
-    "appcache-webpack-plugin": "^1.4.0",
-    "css-loader": "^5.2.0",
-    "html-loader": "^2.1.2",
-    "html-webpack-plugin": "^5.3.1",
-    "mini-css-extract-plugin": "^1.4.0",
+    "pug-walk": "^2.0.0",
     "rimraf": "^3.0.2",
     "webpack": "^5.28.0",
-    "webpack-cli": "^4.6.0"
+    "webpack-cli": "^4.9.1"
   },
   "peerDependencies": {
     "html-webpack-plugin": "^4.0.0 || ^5.0.0",

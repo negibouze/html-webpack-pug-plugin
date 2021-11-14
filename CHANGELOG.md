@@ -1,6 +1,25 @@
 Change History
 ==============
 
+v4.0.0 (Nov 14, 2021)
+---
+
+### Breaking Changes
+
+* Stopped installing the following packages as dependencies (for security reasons).
+  * pug-lexer
+  * pug-parser
+  * pug-walk
+  * pug-source-gen
+
+### Enhancements
+
+* None.
+
+### Bug Fixes
+
+* None.
+
 v3.0.0 (Mar 28, 2021)
 ---
 

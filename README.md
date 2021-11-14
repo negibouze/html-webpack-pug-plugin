@@ -75,6 +75,8 @@ Options
 | `ast` | `{Boolean}` | `false` | if `true`  it uses ast ([pug-source-gen](https://github.com/pugjs/pug-source-gen) is used, but sometimes it does not work well because it is not maintained). |
 | `adjustIndent` | `{Boolean}` | `false` | if `true` the indent will be adjusted automatically (sometimes it does not work well). |
 
+**Caution: It is recommended to avoid using AST mode as much as possible, as some required packages are old and vulnerable.**
+
 Here's an example webpack config illustrating how to use these options
 
 ***webpack.config.js***
