@@ -40,10 +40,6 @@
   },
   "peerDependencies": {
     "html-webpack-plugin": "^4.0.0 || ^5.0.0",
-    "pug-lexer": "^5.0.1",
-    "pug-parser": "^6.0.0",
-    "pug-source-gen": "0.0.2",
-    "pug-walk": "^2.0.0",
     "webpack": "^3.0.0 || ^4.0.0 || ^5.0.0"
   }
 }

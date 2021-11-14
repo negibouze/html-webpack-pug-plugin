@@ -465,10 +465,23 @@ html\n\
    * @param inject htmlPluginData.plugin.options.inject
    */
   injectAssetsUsingAST (html, head, body, assets, inject) {
-    var lexer = require('pug-lexer');
-    var parser = require('pug-parser');
-    var walk = require('pug-walk');
-    var generater = require('pug-source-gen');
+    var lexer, parser, walk, generater
+  try {
+      lexer = require('pug-lexer');
+      parser = require('pug-parser');
+      walk = require('pug-walk');
+      generater = require('pug-source-gen');
+    } catch (err){
+      var message = '\
+Sorry, the following packages are required for AST mode (for security reasons, they are not implicitly installed in this packages).\n\
+・pug-lexer\n\
+・pug-parser\n\
+・pug-walk\n\
+・pug-source-gen\n\
+\n\
+Caution: It is recommended to avoid using AST mode as much as possible, as some packages are old and vulnerable.';
+      throw new Error(message);
+    }
   
     var self = this;
     var ast = parser(lexer(html));
