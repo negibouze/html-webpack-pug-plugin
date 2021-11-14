@@ -1,7 +1,7 @@
 Change History
 ==============
 
-v4.0.0 (Nov xx, 2021)
+v4.0.0 (Nov 14, 2021)
 ---
 
 ### Breaking Changes
